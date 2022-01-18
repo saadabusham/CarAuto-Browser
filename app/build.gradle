@@ -1,3 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'dagger.hilt.android.plugin'
+android {
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
+
+    signingConfigs {
+        config {
+            storeFile file("${project.rootDir}/keystore/clubzero.jks")
+            storePassword "TechnZone2021"
+            keyAlias "Technzone"
+            keyPassword "TechnZone2021"
+        }
+    }
+    defaultConfig {
+        applicationId "com.technzone.baseapp"
+        minSdkVersion 23
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+        buildConfigField("String", "DEFAULT_CHART_URL", "\"http://mobile-develop.demo.chartiq.com.s3-website-us-east-1.amazonaws.com\"")
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        setProperty("archivesBaseName", "BaseApp")
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    hilt {
+        enableTransformForLocalTests = true
+    }
+
+    buildTypes {
+        release {
+            buildConfigField("String", "AppBaseUrl", baseUrlRelese)
+            buildConfigField("String","ImageSubUrl", imageSubUrl)
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.config
+        }
+
+        debug {
+            buildConfigField("String", "AppBaseUrl", baseUrlDebug)
+            buildConfigField("String","ImageSubUrl", imageSubUrl)
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.config
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    packagingOptions {
+        pickFirst 'META-INF/imagepicker_release.kotlin_module'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+}
+
 dependencies {
     // Default
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -41,7 +131,7 @@ dependencies {
     implementation 'com.akexorcist:localization:1.2.6'
 
     // Navigation Jetpack
-    def nav_version = "2.2.1"
+    def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
@@ -58,7 +148,7 @@ dependencies {
     implementation 'com.github.dhaval2404:imagepicker:1.7.5'
 
     // Glide Image Loader
-    def glide_image_loader_version = "4.11.0"
+    def glide_image_loader_version = "4.12.0"
     implementation "com.github.bumptech.glide:glide:$glide_image_loader_version"
     kapt "com.github.bumptech.glide:compiler:$glide_image_loader_version"
 
@@ -80,11 +170,11 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:$viewmodel_version"
 
     // Coroutine Scopes
-    def coroutine_scopes_version = "2.2.0"
+    def coroutine_scopes_version = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$coroutine_scopes_version"
 
     // Retrofit
-    def retrofit_version = "2.7.2"
+    def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:2.7.1"
 
@@ -180,7 +270,7 @@ dependencies {
 
 
     // Calendar library
-    def calendarview_version = "2.0.0"
+    def calendarview_version = "2.0.1"
     implementation "com.github.prolificinteractive:material-calendarview:${calendarview_version}"
 
     //Shimmer facebook
