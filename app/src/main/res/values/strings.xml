@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaseApp</string>
+    <string name="app_name">CarAuto Browser</string>
     <string name="app_license">Copyright@Technzone Company</string>
 
     <!-- SelectLanguageFragment-->

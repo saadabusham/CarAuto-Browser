@@ -17,7 +17,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.technzone.baseapp"
+        applicationId "com.sedo.car_auto_browser"
         minSdkVersion 23
         targetSdkVersion 31
         versionCode 1
@@ -26,7 +26,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        setProperty("archivesBaseName", "BaseApp")
+        setProperty("archivesBaseName", "CarAuto Browser")
         vectorDrawables {
             useSupportLibrary = true
         }

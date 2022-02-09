@@ -9,7 +9,7 @@
             type="Boolean" />
         <variable
             name="item"
-            type="com.technzone.baseapp.data.models.general.Countries" />
+            type="com.technzone.car_auto_browser.data.models.general.Countries" />
     </data>
 
     <RelativeLayout
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_42sdp">
 
-        <com.technzone.baseapp.ui.base.views.AppTextView
+        <com.technzone.car_auto_browser.ui.base.views.AppTextView
             android:id="@+id/tvTitle"
             style="@style/textview_normal_semibold"
             android:layout_width="match_parent"
