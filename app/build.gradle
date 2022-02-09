@@ -10,18 +10,18 @@ android {
 
     signingConfigs {
         config {
-            storeFile file("${project.rootDir}/keystore/clubzero.jks")
-            storePassword "TechnZone2021"
-            keyAlias "Technzone"
-            keyPassword "TechnZone2021"
+            storeFile file("${project.rootDir}/jks/KeyStore.jks")
+            storePassword "Sedo@2022"
+            keyAlias "key0"
+            keyPassword "Sedo@2022"
         }
     }
     defaultConfig {
         applicationId "com.sedo.car_auto_browser"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.2"
         buildConfigField("String", "DEFAULT_CHART_URL", "\"http://mobile-develop.demo.chartiq.com.s3-website-us-east-1.amazonaws.com\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -140,12 +140,6 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:$viewpager2_version"
     //view pager animations
     implementation 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
-
-    // Image Picker
-    def image_picker_version = "1.4.3"
-    implementation "com.github.nguyenhoanglam:ImagePicker:$image_picker_version"
-
-    implementation 'com.github.dhaval2404:imagepicker:1.7.5'
 
     // Glide Image Loader
     def glide_image_loader_version = "4.12.0"

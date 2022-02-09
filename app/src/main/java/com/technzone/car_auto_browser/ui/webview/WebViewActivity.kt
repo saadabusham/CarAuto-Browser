@@ -24,9 +24,9 @@ class WebViewActivity : BaseBindingActivity<ActivityWebviewBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(
             layoutResID = R.layout.activity_webview,
-            hasToolbar = true,
-            hasBackButton = true,
-            showBackArrow = true,
+            hasToolbar = false,
+            hasBackButton = false,
+            showBackArrow = false,
             hasTitle = false
         )
         WebStorage.getInstance().deleteAllData()
@@ -46,7 +46,7 @@ class WebViewActivity : BaseBindingActivity<ActivityWebviewBinding>() {
         binding?.webView?.settings?.javaScriptCanOpenWindowsAutomatically = true
         binding?.webView?.webViewClient = WebViewClient()
 
-        binding?.webView?.loadUrl("https://www.youtube.com/")
+        binding?.webView?.loadUrl("https://www.google.com/")
     }
     fun installAPK(file: File?) {
         val intent: Intent
