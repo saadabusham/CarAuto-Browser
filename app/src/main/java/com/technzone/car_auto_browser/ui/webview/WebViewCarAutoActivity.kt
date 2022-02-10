@@ -47,31 +47,6 @@ class WebViewCarAutoActivity : BaseBindingCarActivity() {
 
         webView?.loadUrl("https://www.youtube.com/")
     }
-    fun installAPK(file: File?) {
-        val intent: Intent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
-            intent.data = getUri(file)
-            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK
-        } else {
-            intent = Intent(Intent.ACTION_VIEW)
-            intent.setDataAndTypeAndNormalize(
-                Uri.fromFile(file),
-                "application/vnd.android.package-archive"
-            )
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        intent.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true)
-        intent.putExtra(Intent.EXTRA_INSTALLER_PACKAGE_NAME, "com.android.vending")
-        applicationContext.startActivity(intent)
-    }
-    fun getUri(file: File?): Uri? {
-        return FileProvider.getUriForFile(
-            applicationContext,
-            "sksa.aa.customapps.fileProvider",
-            file!!
-        )
-    }
     companion object {
         fun start(context: Context?) {
             val intent = Intent(context, WebViewCarAutoActivity::class.java)

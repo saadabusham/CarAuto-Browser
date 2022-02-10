@@ -36,7 +36,7 @@
         <service
             android:name=".service.auto.CarAutoService"
             android:exported="true"
-            android:label="Hello Android Auto">
+            android:label="CarAuto Browser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.android.gms.car.category.CATEGORY_PROJECTION" />

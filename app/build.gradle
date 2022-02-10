@@ -39,7 +39,7 @@ android {
     buildTypes {
         release {
             buildConfigField("String", "AppBaseUrl", baseUrlRelese)
-            buildConfigField("String","ImageSubUrl", imageSubUrl)
+            buildConfigField("String", "ImageSubUrl", imageSubUrl)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.config
@@ -47,7 +47,7 @@ android {
 
         debug {
             buildConfigField("String", "AppBaseUrl", baseUrlDebug)
-            buildConfigField("String","ImageSubUrl", imageSubUrl)
+            buildConfigField("String", "ImageSubUrl", imageSubUrl)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.config
@@ -83,19 +83,24 @@ android {
     }
 
     buildFeatures {
-//        dataBinding = true
+        dataBinding = true
     }
-    configurations {
-        all {
-
-            exclude module:'gson'
-        }
-    }
+//    configurations {
+//        all {
+//
+//            exclude module: 'gson'
+//        }
+//    }
 }
 
 dependencies {
     // Default
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation(fileTree(dir: 'libs', include: ['*.jar']))
+    implementation files('libs/androidauto.jar'){
+        configurations {
+            compile.exclude module: 'gson'
+        }
+    }
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'androidx.core:core-ktx:1.7.0'
