@@ -10,8 +10,6 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.akexorcist.localizationactivity.core.LocalizationActivityDelegate
 import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.technzone.car_auto_browser.R
@@ -19,16 +17,13 @@ import com.technzone.car_auto_browser.data.api.response.ResponseSubErrorsCodeEnu
 import com.technzone.car_auto_browser.ui.base.dialogs.CustomDialogUtils
 import com.technzone.car_auto_browser.utils.HandleRequestFailedUtil
 import com.technzone.car_auto_browser.utils.extensions.longToast
-import com.technzone.car_auto_browser.utils.pref.SharedPreferencesUtil
-import kotlinx.android.synthetic.main.layout_toolbar.view.*
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
 
-abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActivity(),
+abstract class BaseBindingActivity : LocalizationActivity(),
     IBaseBindingActivity {
 
-    var binding: BINDING? = null
     private var toolbar: Toolbar? = null
 
 
@@ -64,11 +59,7 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
         @DrawableRes navigationIcon: Int? = null
     ) {
         if (isBindingEnabled()) {
-            binding = DataBindingUtil.inflate(layoutInflater, layoutResID, null, false)
-            //To use a LiveData object with your binding class,
-            // you need to specify a lifecycle owner to define the scope of the LiveData object.
-            binding?.lifecycleOwner = this
-            super.setContentView(binding?.root)
+            super.setContentView(layoutResID)
         } else {
             super.setContentView(layoutResID)
         }
@@ -111,8 +102,6 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
 
         if (hasTitle) {
             supportActionBar?.title = ""
-            toolbar?.tvTitle?.text =
-                if (titleString.isNullOrEmpty()) getString(title) else titleString
         } else {
             supportActionBar?.setDisplayShowTitleEnabled(false)
         }
@@ -275,8 +264,6 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : LocalizationActi
         }
 
         builder.setOnDismissListener {
-            SharedPreferencesUtil.getInstance(this).logout()
-//            AuthActivity.start(this)
         }
 
         builder.show()

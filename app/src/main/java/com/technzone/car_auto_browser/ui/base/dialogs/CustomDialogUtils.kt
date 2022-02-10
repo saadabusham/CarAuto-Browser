@@ -7,22 +7,14 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.Window
 import android.view.WindowManager
-import androidx.databinding.DataBindingUtil
 import com.technzone.car_auto_browser.R
-import com.technzone.car_auto_browser.databinding.ProgressbarBinding
 
 open class CustomDialogUtils : Dialog {
     private var mProgressbar: CustomDialogUtils? = null
 
     private constructor(context: Context) : super(context) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val dialogProgressBinding: ProgressbarBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(getContext()),
-                R.layout.progressbar,
-                null,
-                false
-        )
-        setContentView(dialogProgressBinding.root)
+        setContentView(R.layout.progressbar)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         window?.setBackgroundDrawableResource(android.R.color.transparent)

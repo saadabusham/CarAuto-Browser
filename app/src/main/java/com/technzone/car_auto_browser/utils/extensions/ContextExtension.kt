@@ -5,22 +5,10 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
-import android.net.ConnectivityManager
 import android.net.Uri
-import android.os.Build
-import android.telephony.TelephonyManager
-import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.technzone.car_auto_browser.R
-import com.technzone.car_auto_browser.utils.pref.PrefConstants.APP_LANGUAGE_VALUE
-import com.technzone.car_auto_browser.common.CommonEnums
-import com.technzone.car_auto_browser.data.models.general.Countries
-import com.technzone.car_auto_browser.utils.CountryToPhonePrefix.getCountryByCode
-import com.technzone.car_auto_browser.utils.pref.SharedPreferencesUtil
-import java.util.*
 
 fun Context?.longToast(toastMessage: String?) {
     if (toastMessage.isNullOrEmpty()) return
@@ -63,14 +51,7 @@ fun Context?.copyText(textWillBeCopy: String) {
 }
 
 fun Context.updateLanguage() {
-    val local = Locale(
-        SharedPreferencesUtil.getInstance(this)
-            .getStringPreferences(APP_LANGUAGE_VALUE, CommonEnums.Languages.English.value)
-    )
-    Locale.setDefault(local)
-    val configuration: Configuration = this.resources.configuration
-    configuration.setLocale(local)
-    this.resources.updateConfiguration(configuration, this.resources.displayMetrics)
+
 }
 
 fun Uri?.openInBrowser(context: Context) {
@@ -91,40 +72,21 @@ fun String?.asUri(): Uri? {
 fun Activity.refreshLocal() {
     try {
 
-        val language = SharedPreferencesUtil.getInstance(this)
-            .getStringPreferences(APP_LANGUAGE_VALUE, CommonEnums.Languages.English.value)
-
-        updateLanguage()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if (language == CommonEnums.Languages.English.value) {
-                this.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
-            } else {
-                this.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-
-            }
-        }
+//        val language = SharedPreferencesUtil.getInstance(this)
+//            .getStringPreferences(APP_LANGUAGE_VALUE, CommonEnums.Languages.English.value)
+//
+//        updateLanguage()
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            if (language == CommonEnums.Languages.English.value) {
+//                this.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
+//            } else {
+//                this.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+//
+//            }
+//        }
 
     } catch (ignore: Exception) {
 
     }
 }
-
-fun Context?.deviceIsConnectedToInternet(): Boolean {
-    val netInfo =
-        (this?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
-
-    if (netInfo != null) {
-        if (netInfo.isConnected) {
-            return true
-        }
-    }
-    return false
-}
-fun Context.getDeviceCountryCode(): Countries {
-    val tm =this.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-    val localData: List<Countries> =
-        readRawJson(this, R.raw.countries)
-    return localData.getCountryByCode(tm.networkCountryIso)
-}
-
 

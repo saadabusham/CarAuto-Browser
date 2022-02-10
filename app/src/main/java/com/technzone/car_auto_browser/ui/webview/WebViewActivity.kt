@@ -7,17 +7,17 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebStorage
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.content.FileProvider
 import com.technzone.car_auto_browser.R
-import com.technzone.car_auto_browser.databinding.ActivityWebviewBinding
 import com.technzone.car_auto_browser.ui.base.activity.BaseBindingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 
 @AndroidEntryPoint
-class WebViewActivity : BaseBindingActivity<ActivityWebviewBinding>() {
+class WebViewActivity : BaseBindingActivity() {
 
     var webViewContent: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,24 +29,25 @@ class WebViewActivity : BaseBindingActivity<ActivityWebviewBinding>() {
             showBackArrow = false,
             hasTitle = false
         )
+        val webView = findViewById<WebView>(R.id.webView)
         WebStorage.getInstance().deleteAllData()
-        binding?.webView?.settings?.javaScriptEnabled = true
-        binding?.webView?.settings?.loadWithOverviewMode = true
-        binding?.webView?.settings?.useWideViewPort = true
-        binding?.webView?.setLayerType(View.LAYER_TYPE_HARDWARE, null)
-        binding?.webView?.settings?.domStorageEnabled = true
-        binding?.webView?.settings?.loadWithOverviewMode = true
-        binding?.webView?.settings?.useWideViewPort = true
-        binding?.webView?.settings?.allowUniversalAccessFromFileURLs = true
-        binding?.webView?.settings?.allowFileAccessFromFileURLs = true
-        binding?.webView?.settings?.builtInZoomControls = true
-        binding?.webView?.settings?.displayZoomControls = false
-        binding?.webView?.settings?.setSupportMultipleWindows(true)
+        webView?.settings?.javaScriptEnabled = true
+        webView?.settings?.loadWithOverviewMode = true
+        webView?.settings?.useWideViewPort = true
+        webView?.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+        webView?.settings?.domStorageEnabled = true
+        webView?.settings?.loadWithOverviewMode = true
+        webView?.settings?.useWideViewPort = true
+        webView?.settings?.allowUniversalAccessFromFileURLs = true
+        webView?.settings?.allowFileAccessFromFileURLs = true
+        webView?.settings?.builtInZoomControls = true
+        webView?.settings?.displayZoomControls = false
+        webView?.settings?.setSupportMultipleWindows(true)
 
-        binding?.webView?.settings?.javaScriptCanOpenWindowsAutomatically = true
-        binding?.webView?.webViewClient = WebViewClient()
+        webView?.settings?.javaScriptCanOpenWindowsAutomatically = true
+        webView?.webViewClient = WebViewClient()
 
-        binding?.webView?.loadUrl("https://www.google.com/")
+        webView?.loadUrl("https://www.google.com/")
     }
     fun installAPK(file: File?) {
         val intent: Intent

@@ -12,7 +12,6 @@ import android.widget.ImageView
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.PopupMenu
-import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.technzone.car_auto_browser.BuildConfig
 import java.lang.System.currentTimeMillis
@@ -138,8 +137,6 @@ fun ImageView.loadImage(url: String?) {
         }
     } as String
 
-    Glide.with(this).load(fullUrl)
-        .into(this)
 }
 
 inline fun EditText.onTextChanged(crossinline callback: (text: CharSequence?) -> Unit) {

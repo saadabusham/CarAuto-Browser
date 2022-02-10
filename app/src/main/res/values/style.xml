@@ -69,9 +69,6 @@
         <!-- PopUp Menu -->
         <item name="popupMenuStyle">@style/MyPopupMenu</item>
 
-        <!-- Verification Code Style -->
-        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
-
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="searchViewStyle">@style/SearchViewMy</item>
     </style>
@@ -385,7 +382,6 @@
     <!-- IHospital Provider Dialog Buttons Style -->
     <style name="DialogPositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/text_color</item>
     </style>
 
     <!-- IHospital Provider Dialog Buttons Style -->
@@ -726,7 +722,6 @@
     </style>
 
     <style name="ColorSwitchStyle">
-        <item name="colorControlActivated">@color/main_green_color</item>
     </style>
     "
 

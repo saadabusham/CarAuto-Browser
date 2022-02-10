@@ -7,27 +7,14 @@ import android.os.Handler
 import android.os.Looper
 import androidx.activity.viewModels
 import com.technzone.car_auto_browser.R
-import com.technzone.car_auto_browser.common.MyApplication
-import com.technzone.car_auto_browser.data.api.response.ResponseSubErrorsCodeEnum
-import com.technzone.car_auto_browser.data.common.CustomObserverResponse
-import com.technzone.car_auto_browser.data.models.auth.login.UserDetailsResponseModel
-import com.technzone.car_auto_browser.data.models.configuration.ConfigurationWrapperResponse
-import com.technzone.car_auto_browser.databinding.ActivitySplashBinding
-import com.technzone.car_auto_browser.ui.MainActivity
-import com.technzone.car_auto_browser.ui.auth.AuthActivity
 import com.technzone.car_auto_browser.ui.base.activity.BaseBindingActivity
 import com.technzone.car_auto_browser.ui.webview.WebViewActivity
-import com.technzone.car_auto_browser.utils.pref.SharedPreferencesUtil
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
+class SplashActivity : BaseBindingActivity() {
 
     private val viewModel: SplashViewModel by viewModels { defaultViewModelProviderFactory }
-
-    @Inject
-    lateinit var myApp: MyApplication
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,63 +23,14 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
             hasToolbar = false
         )
         Handler(Looper.getMainLooper()).postDelayed({
-//            viewModel.getConfigurationData().observe(this, configurationResultObserver())
             goToNextPage()
         }, 3000)
 
         RuntimeException("This is a RUNTIME EXCEPTION")
     }
 
-    private fun configurationResultObserver(): CustomObserverResponse<ConfigurationWrapperResponse> {
-        return CustomObserverResponse(
-            this,
-            object : CustomObserverResponse.APICallBack<ConfigurationWrapperResponse> {
-                override fun onSuccess(
-                    statusCode: Int,
-                    subErrorCode: ResponseSubErrorsCodeEnum,
-                    data: ConfigurationWrapperResponse?
-                ) {
-                    SharedPreferencesUtil.getInstance(this@SplashActivity)
-                        .setConfigurationPreferences(data)
-                    goToNextPage()
-                }
-            })
-    }
-
-    private fun tokenObserver(): CustomObserverResponse<UserDetailsResponseModel> {
-        return CustomObserverResponse(
-            this,
-            object : CustomObserverResponse.APICallBack<UserDetailsResponseModel> {
-                override fun onSuccess(
-                    statusCode: Int,
-                    subErrorCode: ResponseSubErrorsCodeEnum,
-                    data: UserDetailsResponseModel?
-                ) {
-                    data?.let { it1 -> viewModel.storeUser(it1) }
-                    MainActivity.start(this@SplashActivity)
-                }
-
-                override fun onError(subErrorCode: ResponseSubErrorsCodeEnum, message: String) {
-                    viewModel.logout()
-                    AuthActivity.start(this@SplashActivity)
-                }
-            }
-        )
-
-    }
-
     private fun goToNextPage() {
-        if (!viewModel.isUserLoggedIn()) {
-//            AuthActivity.start(this)
-            WebViewActivity.start(this)
-        } else {
-//            viewModel.updateAccessToken().observe(this, tokenObserver())
-            WebViewActivity.start(this)
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
+        WebViewActivity.start(this)
     }
 
     override fun onNewIntent(intent: Intent?) {

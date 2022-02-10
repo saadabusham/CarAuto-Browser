@@ -1,7 +1,6 @@
 package com.technzone.car_auto_browser.utils.extensions
 
 import android.content.Context
-import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.technzone.car_auto_browser.utils.DateTimeUtil
 import com.technzone.car_auto_browser.utils.validation.Validator
 import com.technzone.car_auto_browser.utils.validation.ValidatorInputTypesEnums
@@ -20,20 +19,6 @@ fun String.validate(validatorInputTypesEnums: ValidatorInputTypesEnums, context:
 
 fun String.validateConfirmPassword(validatorInputTypesEnums: ValidatorInputTypesEnums, passwordToMatch: String, context: Context): Validator.ValidatedData {
     return Validator().validate(validatorInputTypesEnums,this,passwordToMatch,context)
-}
-
-fun String?.getCalendarDay(): CalendarDay {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
-    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-    val outputFormat = SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH)
-    outputFormat.timeZone = TimeZone.getDefault()
-    val date = outputFormat.format(inputFormat.parse(this))
-
-    return CalendarDay.from(
-        date.substring(0, 4).toInt(),
-        date.substring(5, 7).toInt(),
-        date.substring(8, 10).toInt()
-    )
 }
 
 
