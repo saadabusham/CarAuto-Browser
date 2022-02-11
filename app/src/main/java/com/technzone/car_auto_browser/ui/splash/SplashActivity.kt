@@ -8,6 +8,7 @@ import android.os.Looper
 import androidx.activity.viewModels
 import com.technzone.car_auto_browser.R
 import com.technzone.car_auto_browser.ui.base.activity.BaseBindingActivity
+import com.technzone.car_auto_browser.ui.main.activity.MainActivity
 import com.technzone.car_auto_browser.ui.webview.WebViewActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +31,7 @@ class SplashActivity : BaseBindingActivity() {
     }
 
     private fun goToNextPage() {
-        WebViewActivity.start(this)
+        MainActivity.start(this)
     }
 
     override fun onNewIntent(intent: Intent?) {

@@ -3,6 +3,7 @@ package com.technzone.car_auto_browser.ui.base.activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
@@ -18,7 +19,7 @@ import java.net.SocketTimeoutException
 
 abstract class BaseBindingCarActivity : CarActivity(),
     IBaseBindingActivity {
-
+    var rootView: View? = null
 
     lateinit var customDialogUtils: CustomDialogUtils
     override fun showLoadingView() {
@@ -50,6 +51,7 @@ abstract class BaseBindingCarActivity : CarActivity(),
         if (isBindingEnabled()) {
 
             super.setContentView(layoutResID)
+            rootView = rootView
         } else {
             super.setContentView(layoutResID)
         }

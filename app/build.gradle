@@ -95,7 +95,12 @@ android {
 
 dependencies {
     // Default
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //    implementation(fileTree(dir: 'libs', include: ['*.jar']))
+    implementation files('libs/androidauto.jar'){
+        configurations {
+            compile.exclude module: 'gson'
+        }
+    }
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'androidx.core:core-ktx:1.7.0'

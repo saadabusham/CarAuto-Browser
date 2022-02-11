@@ -10,6 +10,7 @@ import android.webkit.WebStorage
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.content.FileProvider
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.technzone.car_auto_browser.R
 import com.technzone.car_auto_browser.ui.base.activity.BaseBindingCarActivity
 import java.io.File
@@ -17,7 +18,8 @@ import java.io.File
 
 class WebViewCarAutoActivity : BaseBindingCarActivity() {
 
-    var webViewContent: Int? = null
+    var webView: WebView? = null
+    var refreshLayout: SwipeRefreshLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(
@@ -27,10 +29,17 @@ class WebViewCarAutoActivity : BaseBindingCarActivity() {
             showBackArrow = false,
             hasTitle = false
         )
-        val webView = findViewById(R.id.webView) as WebView
+        webView = findViewById(R.id.webView) as WebView
+        refreshLayout = findViewById(R.id.swipRefresh) as SwipeRefreshLayout
+
+        setUpWebView()
+        setUpRefreshLayout()
+    }
+
+    private fun setUpWebView() {
         WebStorage.getInstance().deleteAllData()
-        webView.settings?.javaScriptEnabled = true
-        webView.settings?.loadWithOverviewMode = true
+        webView?.settings?.javaScriptEnabled = true
+        webView?.settings?.loadWithOverviewMode = true
         webView?.settings?.useWideViewPort = true
         webView?.setLayerType(View.LAYER_TYPE_HARDWARE, null)
         webView?.settings?.domStorageEnabled = true
@@ -47,6 +56,14 @@ class WebViewCarAutoActivity : BaseBindingCarActivity() {
 
         webView?.loadUrl("https://www.youtube.com/")
     }
+
+    private fun setUpRefreshLayout() {
+        refreshLayout?.setOnRefreshListener {
+            refreshLayout?.isRefreshing = false
+            webView?.reload()
+        }
+    }
+
     fun installAPK(file: File?) {
         val intent: Intent
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -65,6 +82,7 @@ class WebViewCarAutoActivity : BaseBindingCarActivity() {
         intent.putExtra(Intent.EXTRA_INSTALLER_PACKAGE_NAME, "com.android.vending")
         applicationContext.startActivity(intent)
     }
+
     fun getUri(file: File?): Uri? {
         return FileProvider.getUriForFile(
             applicationContext,
@@ -72,6 +90,7 @@ class WebViewCarAutoActivity : BaseBindingCarActivity() {
             file!!
         )
     }
+
     companion object {
         fun start(context: Context?) {
             val intent = Intent(context, WebViewCarAutoActivity::class.java)

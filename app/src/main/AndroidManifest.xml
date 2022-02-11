@@ -33,10 +33,16 @@
             android:windowSoftInputMode="adjustResize"
             android:exported="true"/>
 
+        <activity
+            android:name="com.technzone.car_auto_browser.ui.main.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"/>
+
         <service
             android:name=".service.auto.CarAutoService"
             android:exported="true"
-            android:label="Hello Android Auto">
+            android:label="CarAuto Browser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.google.android.gms.car.category.CATEGORY_PROJECTION" />

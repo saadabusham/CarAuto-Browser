@@ -11,6 +11,9 @@ object Constants {
     const val title: String = "TITLE"
     const val body: String = "BODY"
 
+    const val YOUTUBE: String = "https://www.youtube.com/"
+    const val GOOGLE: String = "https://www.google.com/"
+
     object BundleData {
 
         const val COUNTRY: String = "countryCode"

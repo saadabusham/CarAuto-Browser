@@ -192,4 +192,7 @@
     <string name="enable_face_id_to_let_you_login_proceed_your_insurance_faster"><![CDATA[Enable Face ID to let you login & proceed your insurance faster.]]></string>
     <string name="skip_i_ll_do_this_later">Skip, I’ll do this later</string>
     <string name="go_to_home">Go to home</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_profile">Profile</string>
 </resources>

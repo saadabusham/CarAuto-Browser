@@ -4,11 +4,11 @@
     <!-- App Colors -->
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
-    <color name="colorAccent">#ED222F</color>
+    <color name="colorAccent">#000000</color>
     <color name="colorAccentDark">#4f5b74</color>
-    <color name="color_app_background">#FFFFFF</color>
+    <color name="color_app_background">#000000</color>
     <color name="ripple_color">#0be8252e</color>
-    <color name="app_background_color">#FFFFFF</color>
+    <color name="app_background_color">#000000</color>
     <!-- Views Default colors -->
     <color name="text_default_color">#7f8592</color>
     <color name="text_dark_color">#3A4155</color>

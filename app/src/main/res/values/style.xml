@@ -24,7 +24,8 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:windowBackground">@color/color_app_background</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">@color/app_background_color</item>
         // To change status bar icon to be dark, set false to change icons to light
 
         <!-- Set Views Default Style -->
