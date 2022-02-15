@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="31"/>
 <!--        tools:ignore="GradleOverrides" />-->
+    <uses-feature
+        android:name="android.hardware.type.automotive"
+        android:required="true" />
+
     <application
         android:name="com.technzone.car_auto_browser.common.MyApplication"
         android:allowBackup="false"
@@ -49,6 +53,16 @@
                 <category android:name="com.google.android.gms.car.category.CATEGORY_PROJECTION_OEM" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="com.android.dynamic.apk.fused.modules"
+            android:value="base,exoplayer,sftp,smb,tv,vlc,web" />
+<!--        <service-->
+<!--            android:name=".service.auto.CarAutoService"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="androidx.car.app.CarAppService" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
     </application>
 
 </manifest>

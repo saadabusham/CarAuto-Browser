@@ -157,6 +157,10 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
+//    implementation("androidx.car.app:app:1.1.0")
+//
+//    // For testing
+//    implementation("androidx.car.app:app-testing:1.2.0-beta02")
 }
 //apply plugin: 'com.google.gms.google-services'
 //apply plugin: 'com.google.firebase.crashlytics'
